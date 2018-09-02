@@ -1,0 +1,47 @@
+Name     LCDGA ;
+PartNo   00 ;
+Date     11/8/2017 ;
+Revision 01 ;
+Designer Engineer ;
+Company  University of colorado boulder ;
+Assembly None ;
+Location  ;
+Device   virtual ;
+
+/* *************** INPUT PINS *********************/
+PIN 5 = A15                        ; /*   A15 pin                              */ 
+PIN 2 = A14                        ; /*   A14 PIN                              */ 
+PIN 7= A13                        ; /*     A13 PIN                            */ 
+PIN 8= A12                        ; /*      A12 PIN                           */ 
+PIN 6 = A11                        ; /*     A11 PIN                            */ 
+PIN 3 = RD                       ; /*              READ PIN                   */ 
+PIN 9= WR                        ; /*                      WRITE PIN           */ 
+
+/* *************** OUTPUT PINS *********************/
+PIN 15 = RS                        ; /* REGISTER SELECT                                */ 
+PIN  16= RW                        ; /*                READ AND WRITE                 */ 
+PIN  12= ENA                       ; /*                              ENABLE   */ 
+
+
+/* LOGIC EQAUTION FOR GENERATINF ENABLE SIGNAL
+*lcd_ir_rd  : 0xe800
+* lcd_dt_rd : 0xf800
+* lcd_ir_wr  : 0xe000
+* lcd_dt_wr : 0xf000
+*
+ */
+RS = A12;
+RW = A11;
+A = A15 & A14 & A13  ;         /* TO ENABLE FOR MEMORY MAPPED ADDRESSES */
+E1 = !A12 & A11;				/* to get four combinations for instruction and data read and write : four diffrerent enables */ 
+E2 = A12 & A11;
+E3 = !A12 & !A11;
+E4 = A12 & !A11;
+E = E1 # E2 # E3 # E4;           /* to enable for any of them being true */       
+A1 = A & E;              
+ENA = ((A1 & !WR) # (A1 & !RD));   /* TO GENERATE DELAY FOR ENABLE SIGNAL FOR LCD*/
+
+
+ 
+
+

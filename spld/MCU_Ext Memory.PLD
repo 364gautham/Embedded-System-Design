@@ -1,0 +1,26 @@
+Name     LAB_3_1ST ;
+PartNo   00 ;
+Date     10/16/2017 ;
+Revision 01 ;
+Designer Engineer ;
+Company  University of colorado boulder ;
+Assembly None ;
+Location  ;
+Device   virtual ;
+
+/* *************** INPUT PINS *********************/
+PIN  5   = A15                        ; /* A15 BIT                                 */ 
+PIN  3   = A10                        ; /* A10 BIT                                */ 
+PIN  6   = A11                        ; /* A11 BIT                                */ 
+PIN  8   = A12                        ; /* A12 BIT                                */ 
+PIN  7   = A13                        ; /* A13 BIT                                */ 
+PIN  2   = A14                        ; /* A14 BIT                                */ 
+
+/* *************** OUTPUT PINS *********************/
+PIN 14   =  ENABLE                       ; /*  TO CHIP ENABLE                               */ 
+
+AA10 = A10 # A11 # A12 # A13 # A14 ;     /* LOGIC EQUATION FOR ENABLING REQ ADDRESS */
+ENABLE = !(!A15 & AA10) ;   /* LOGIC EQN FOR ENABLE */
+
+
+
